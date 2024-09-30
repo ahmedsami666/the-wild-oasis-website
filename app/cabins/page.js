@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
-import { getCabins } from "../_lib/data-service";
 import Spinner from "../_components/Spinner";
+
+export const revalidate = 30 // revalidate cache for every 30 sec
 
 export default async function Page() {
   // CHANGE
