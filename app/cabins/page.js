@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
 
 export const revalidate = 30 // revalidate cache for every 30 sec
 
-export default async function Page() {
-  // CHANGE
+export default async function Page({searchParams}) {
+  const filter = searchParams?.capacity ?? 'all'
 
   return (
     <div>
@@ -20,8 +21,11 @@ export default async function Page() {
         away from home. The perfect spot for a peaceful, calm vacation. Welcome
         to paradise.
       </p>
-      <Suspense fallback={<Spinner />}>
-      <CabinList />
+      <div className="flex justify-end mb-8 ">
+        <Filter />
+      </div>
+      <Suspense fallback={<Spinner />} key={filter}>
+      <CabinList filter={filter} />
       </Suspense>
     </div>
   );
